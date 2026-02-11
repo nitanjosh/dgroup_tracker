@@ -46,14 +46,13 @@ upline_meet = None
 downline_meet = None
 leader_name = None
 
-if dgroup_type in ["D-Leader", "D-Member", "Potential Leader"]:
-    if dgroup_type == "D-Member":
-        col1, col2 = st.columns(2)
-        upline_meet = col1.date_input("Select most recent meet with leader:")
-        downline_meet = col1.date_input("Select most recent downline meeting:")
-        leader_name = col2.text_input("Dgroup Leader Full Name:")
-    else:  # D-Leader or Potential Leader
-        downline_meet = st.date_input("Select most recent meeting date:")
+if dgroup_type in ["D-Leader", "Potential Leader"]:
+    leader_name = st.text_input("Dgroup Leader Full Name:")
+    col1, col2 = st.columns(2)
+    upline_meet = col1.date_input("Select most recent UPLINE meeting:")
+    downline_meet = col2.date_input("Select most recent DOWNLINE meeting:")
+else:  #Member
+    upline_meet = st.date_input("Select most recent meet with your leader: ")
     
 st.divider()
 
