@@ -47,7 +47,7 @@ downline_meet = None
 leader_name = None
 
 if dgroup_type in ["D-Leader", "Potential Leader"]:
-    leader_name = st.text_input("Dgroup Leader Full Name:")
+    leader_name = st.text_input("Dgroup Leader Full Name:", placeholder="Enter your leader's name")
     col1, col2 = st.columns(2)
     upline_meet = col1.date_input("Select most recent UPLINE meeting:")
     downline_meet = col2.date_input("Select most recent DOWNLINE meeting:")
@@ -60,9 +60,7 @@ if st.button("Submit", use_container_width=True):
     # Validate required fields
     if not first_name or not last_name:
         st.error("Please fill in both First Name and Last Name.")
-    elif dgroup_type == "D-Member" and not leader_name:
-        st.error("Please provide your Dgroup Leader's Full Name.")
-    elif dgroup_type == "Leader-Member" and not leader_name:
+    elif dgroup_type in ["D-Leader", "Potential Leader"] and not leader_name:
         st.error("Please provide your Dgroup Leader's Full Name.")
     else:
         # Insert record into database
