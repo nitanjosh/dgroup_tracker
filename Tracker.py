@@ -20,7 +20,7 @@ st.markdown("<h4 class='centered'>Dgroup Tracking System for Elevate Exalt</h4>"
 st.divider()
 
 # Dropdown cards explaining dgroup types
-col1, col2, col3, col4 = st.columns(4)
+col1, col2, col3 = st.columns(3)
 
 with col1:
     with st.expander("**D-Leader**"):
@@ -31,10 +31,6 @@ with col2:
         st.write("Meet with your D-Leader")
 
 with col3:
-    with st.expander("**Leader-Member**"):
-        st.write("Both met your D-Leader and D-Members")
-
-with col4:
     with st.expander("**Potential Leader**"):
         st.write("D-Leader handling 1-2 D-members")
 
@@ -43,7 +39,7 @@ st.subheader("Dgroup Meeting Information")
 first_name = st.text_input("First Name:", placeholder="(Ex. Juan)")
 last_name = st.text_input("Last Name:", placeholder="(Ex. Dela Cruz)")
 dgroup_type = st.selectbox("Select Dgroup Type:",
-                           ["D-Leader", "D-Member", "Leader-Member", "Potential Leader"])
+                           ["D-Leader", "D-Member", "Potential Leader"])
 
 # Initialize variables
 upline_meet = None
@@ -54,15 +50,11 @@ if dgroup_type in ["D-Leader", "D-Member", "Potential Leader"]:
     if dgroup_type == "D-Member":
         col1, col2 = st.columns(2)
         upline_meet = col1.date_input("Select most recent meet with leader:")
+        downline_meet = col1.date_input("Select most recent downline meeting:")
         leader_name = col2.text_input("Dgroup Leader Full Name:")
     else:  # D-Leader or Potential Leader
         downline_meet = st.date_input("Select most recent meeting date:")
-else:  # Leader-Member
-    leader_name = st.text_input("Dgroup Leader Full Name:")
-    col1, col2 = st.columns(2)
-    downline_meet = col1.date_input("Select most recent downline meeting:")
-    upline_meet = col2.date_input("Select most recent upline meeting:")
-
+    
 st.divider()
 
 if st.button("Submit", use_container_width=True):
