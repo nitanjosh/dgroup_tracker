@@ -9,7 +9,12 @@ DATABASE_URL = os.getenv("DATABASE_URL")
 if not DATABASE_URL:
     raise ValueError("DATABASE_URL not set. Please set it in your .env or Streamlit Secrets.")
 
-engine = create_engine(DATABASE_URL, pool_pre_ping=True)
+engine = create_engine(
+    DATABASE_URL, 
+    pool_pre_ping=True,
+    pool_size=10,  # Number of connections to keep open
+    max_overflow=20  # Additional connections when pool is full
+)
 
 # Connection test
 try:
